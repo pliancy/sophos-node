@@ -62,30 +62,28 @@ export class Sophos {
     return sophos
   }
 
-  // async createStuff(stuff: Stuff): Promise<Stuff> {
-  //   let res = await this._SophosRequest(`${this.domain}/groups.json`, {
-  //     method: "POST",
-  //     body: stuff,
-  //     JSON: true,
-  //   })
-  //   return res.body
-  // }
-
-  // async updateStuff(stuffId: number, stuff: Stuff): Promise<Stuff> {
-  //   let res = await this._SophosRequest(`${this.domain}/stuff/${stuffId}`, {
-  //     method: "PATCH",
-  //     body: stuff,
-  //     JSON: true,
-  //   })
-  //   return res.body
-  // }
-
-  // async deleteStuff(stuffId: number): Promise<Stuff> {
-  //   let res = await this._SophosRequest(`${this.domain}/stuff/${stuffId}`, {
-  //     method: "DELETE",
-  //   })
-  //   return res.body
-  // }
+  async getEndpoints(tenantId: string, tenantApiHost: string): Promise<object[]> {
+    let sophos: any = []
+    let pageKey = ""
+    while (true) {
+      let res = await this._SophosRequest(
+        `${tenantApiHost}/endpoint/v1/endpoints?pageFromKey=${pageKey}`,
+        {
+          method: "GET",
+          headers: {
+            "X-Tenant-ID": tenantId
+          },
+        }
+      )
+      let sophosReturn = JSON.parse(res.body)
+      sophos = sophos.concat(sophosReturn.items)
+      pageKey = sophosReturn.pages.nextKey
+      if (!pageKey) {
+        break
+      }
+    }
+    return sophos
+  }
 
   private async _authenticate(): Promise<string> {
     let res = await got("https://id.sophos.com/api/v2/oauth2/token", {
