@@ -40,11 +40,11 @@ const sophos = new Sophos({
 Get all Tenants as Partner
 
 ```javascript
-await mySophos.getTenants()
+await sophos.getTenants()
 ```
 
 Get All Endpoints from Tenant
 
 ```javascript
-await mySophos.getEndpoints(tenantId, tenantApiHost)
+await sophos.getEndpoints(tenantId, tenantApiHost)
 ```
