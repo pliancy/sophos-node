@@ -13,9 +13,9 @@ npm install sophos
 You must import the package and pass in the `clientId` and `clientSecret` from Sophos to the constructor:
 
 ```javascript
-var Sophos = require('sophos')
+const Sophos = require('sophos')
 
-let mylet mySophos = new Sophos({
+const sophos = new Sophos({
   clientId: "332....",
   clientSecret: "2333..."
 }) 
@@ -24,9 +24,9 @@ let mylet mySophos = new Sophos({
 You can also pass in your partnerId, if using getTenants():
 
 ```javascript
-var Sophos = require('sophos')
+const Sophos = require('sophos')
 
-let mylet mySophos = new Sophos({
+const sophos = new Sophos({
   clientId: "332....",
   clientSecret: "2333..."
   partnerId: "zh67..",
