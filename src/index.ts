@@ -7,14 +7,14 @@ import qs from "qs"
  * @export
  * @interface SophosConfig
  */
-export interface SophosConfig {
+interface SophosConfig {
   clientId: string
   clientSecret: string
   partnerId: string
 }
 
 // example interface for use in the sample commands
-export interface Tenant {
+interface Tenant {
   id: string
   name: string
   dataGeography: "US" | "IE" | "DE"
@@ -25,7 +25,7 @@ export interface Tenant {
   apiHost: string
 }
 
-export class Sophos {
+class Sophos {
   config: SophosConfig
   domain: string
   accessToken: string
@@ -40,7 +40,7 @@ export class Sophos {
   // Example commands
   //
 
-  async getTenant(): Promise<Tenant[]> {
+  async getTenants(): Promise<Tenant[]> {
     let sophos: any = []
     let pageNum = 1
     let pageTotal = 1
@@ -65,7 +65,8 @@ export class Sophos {
   async getEndpoints(tenantId: string, tenantApiHost: string): Promise<object[]> {
     let sophos: any = []
     let pageKey = ""
-    while (true) {
+    let status = true
+    while (status) {
       let res = await this._SophosRequest(
         `${tenantApiHost}/endpoint/v1/endpoints?pageFromKey=${pageKey}`,
         {
@@ -79,7 +80,7 @@ export class Sophos {
       sophos = sophos.concat(sophosReturn.items)
       pageKey = sophosReturn.pages.nextKey
       if (!pageKey) {
-        break
+        status = false
       }
     }
     return sophos
@@ -127,3 +128,5 @@ export class Sophos {
     }
   }
 }
+
+export = Sophos

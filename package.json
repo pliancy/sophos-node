@@ -1,7 +1,7 @@
 {
-  "name": "node-sophos",
+  "name": "sophos",
   "version": "0.0.0",
-  "description": "",
+  "description": "Requests for Sophos's API",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
