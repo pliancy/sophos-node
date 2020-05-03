@@ -46,5 +46,5 @@ await mySophos.getTenants()
 Get All Endpoints from Tenant
 
 ```javascript
-await mySophos.getEndpoints(tenantId, *tenantApiHost*)
+await mySophos.getEndpoints(tenantId, tenantApiHost)
 ```
