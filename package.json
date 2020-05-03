@@ -23,9 +23,9 @@
   "author": "Santese Smith",
   "repository": {
     "type": "git",
-    "url": "https://github.com/santese/node-sophos.git"
+    "url": "https://github.com/santese/sophos-node.git"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "@types/qs": "^6.9.1",
     "got": "^11.0.2",
