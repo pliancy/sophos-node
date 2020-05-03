@@ -1,7 +1,7 @@
 {
   "name": "sophos",
   "version": "0.0.1",
-  "description": "Requests for Sophos's API",
+  "description": "Typescript wrapper for Sophos's API",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
