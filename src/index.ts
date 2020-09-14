@@ -46,7 +46,7 @@ class Sophos {
     let pageTotal = 1
     while (pageTotal - pageNum >= 0) {
       const res = await this._SophosRequest(
-        `${this.domain}/partner/v1/tenants?pageTotal=true&page=${pageNum}&pagesize=500`,
+        `${this.domain}/partner/v1/tenants?pageTotal=true&page=${pageNum}&pagesize=100`,
         {
           method: 'GET',
           headers: {
@@ -55,7 +55,6 @@ class Sophos {
         }
       )
       const sophosReturn = JSON.parse(res.body)
-      console.log(sophosReturn.pages)
       pageTotal = sophosReturn.pages.total
       pageNum++
       sophos = sophos.concat(sophosReturn.items)
