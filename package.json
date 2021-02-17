@@ -46,7 +46,7 @@
     "lint-staged": "^10.2.0",
     "rimraf": "^3.0.2",
     "ts-jest": "^25.4.0",
-    "typedoc": "^0.17.6",
+    "typedoc": "^0.18.0",
     "typescript": "^3.8.3",
     "@types/eslint": "^7.2.0",
     "eslint": "^7.6.0",
