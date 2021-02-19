@@ -15,7 +15,7 @@ export interface SophosTenant {
   apiHost?: string
 }
 
-export interface Endpoint {
+export interface SophosEndpoint {
   id?: string
   type?: string
   tenant?: {
@@ -29,7 +29,7 @@ export interface Endpoint {
     }
     services?: {
       status?: string
-      serviceDetails?: EndpointService[]
+      serviceDetails?: SophosEndpointService[]
     }
   }
   os?: {
@@ -48,29 +48,29 @@ export interface Endpoint {
     id?: string
   }
   tamperProtectionEnabled?: boolean
-  assignedProducts?: EndpointServiceAssignedProduct[]
+  assignedProducts?: SophosEndpointServiceAssignedProduct[]
   lastSeenAt?: string
   encryption?: {
-    volumes?: EndpointEncryptionVolume[]
+    volumes?: SophosEndpointEncryptionVolume[]
   }
 }
 
-export interface EndpointService {
+export interface SophosEndpointService {
   name: string
   status: string
 }
 
-export interface EndpointServiceAssignedProduct {
+export interface SophosEndpointServiceAssignedProduct {
   code: string
   version: string
   status: string
 }
-export interface EndpointEncryptionVolume {
+export interface SophosEndpointEncryptionVolume {
   volumeId: string
   status: string
 }
 
-export interface AccessToken {
+export interface SophosAccessToken {
   access_token?: string
   errorCode?: string
   expires_in?: string

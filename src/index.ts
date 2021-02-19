@@ -1,8 +1,8 @@
 import axios from 'axios'
 import qs from 'qs'
 
-import { SophosTenant, Endpoint, SophosConfig } from './types'
-export { SophosConfig, SophosTenant, Endpoint }
+import { SophosConfig, SophosTenant, SophosEndpoint } from './types'
+export { SophosConfig, SophosTenant, SophosEndpoint }
 
 export class Sophos {
   private readonly _config: SophosConfig
@@ -38,8 +38,8 @@ export class Sophos {
     return tenants
   }
 
-  async getEndpoints(tenantId: string, tenantApiHost: string): Promise<Endpoint[]> {
-    let endpoints: Endpoint[] = []
+  async getEndpoints(tenantId: string, tenantApiHost: string): Promise<SophosEndpoint[]> {
+    let endpoints: SophosEndpoint[] = []
     let pageKey = ''
     let status = true
     while (status) {
