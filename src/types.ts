@@ -56,18 +56,18 @@ export interface SophosEndpoint {
 }
 
 export interface SophosEndpointService {
-  name: string
-  status: string
+  name?: string
+  status?: string
 }
 
 export interface SophosEndpointServiceAssignedProduct {
-  code: string
-  version: string
-  status: string
+  code?: string
+  version?: string
+  status?: string
 }
 export interface SophosEndpointEncryptionVolume {
-  volumeId: string
-  status: string
+  volumeId?: string
+  status?: string
 }
 
 export interface SophosAccessToken {
@@ -75,7 +75,7 @@ export interface SophosAccessToken {
   errorCode?: string
   expires_in?: string
   message?: string
-  refresh_token: string
-  token_type: string
-  trackingId: string
+  refresh_token?: string
+  token_type?: string
+  trackingId?: string
 }
