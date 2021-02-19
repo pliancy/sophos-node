@@ -29,6 +29,7 @@
     "url": "https://github.com/santese/sophos-node.git"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.20",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
     "dotenv": "^8.2.0",
