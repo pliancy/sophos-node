@@ -35,7 +35,7 @@ module.exports = {
   // vue files script and style tags indentation
   vueIndentScriptAndStyle: false,
   // lf for newline
-  endOfLine: 'lf',
+  endOfLine: 'auto',
   // formats quoted code embedded
   embeddedLanguageFormatting: 'auto',
 }
