@@ -1,7 +1,7 @@
 import { Sophos } from '.'
 
-describe('TimelyApp class', () => {
-  it('creates a TimelyApp instance', () => {
+describe('Sophos class', () => {
+  it('creates a Sophos instance', () => {
     const sophos = new Sophos({
       clientId: '1234',
       clientSecret: 'asdf',
