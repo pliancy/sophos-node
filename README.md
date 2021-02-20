@@ -28,8 +28,8 @@ const Sophos = require('sophos')
 
 const sophos = new Sophos({
   clientId: "332....",
-  clientSecret: "2333..."
-  partnerId: "zh67..",
+  clientSecret: "2333...",
+  partnerId: "zh67.."
 }) 
 ```
 
