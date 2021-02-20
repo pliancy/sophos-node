@@ -1,47 +1,23 @@
-import got from 'got'
+import axios from 'axios'
 import qs from 'qs'
 
-/**
- * The Config for the Sophos class
- * This interface allows utilization of sophos API
- * @export
- * @interface SophosConfig
- */
-interface SophosConfig {
-  clientId: string
-  clientSecret: string
-  partnerId?: string
-}
+import { SophosConfig, SophosTenant, SophosEndpoint } from './types'
+export { SophosConfig, SophosTenant, SophosEndpoint }
 
-// example interface for use in the sample commands
-interface Tenant {
-  id: string
-  name: string
-  dataGeography: 'US' | 'IE' | 'DE'
-  dataRegion: string
-  billingType: string
-  parter: any
-  organization: any
-  apiHost: string
-}
-
-class Sophos {
-  config: SophosConfig
+export class Sophos {
+  private readonly _config: SophosConfig
   domain: string
   accessToken: string
 
-  constructor (_config: SophosConfig) {
-    this.config = _config
+  constructor(_config: SophosConfig) {
+    if (!_config.clientId || !_config.clientSecret) throw new Error('Missing required inputs for Sophos constructor')
+    this._config = _config
     this.domain = 'https://api.central.sophos.com'
     this.accessToken = ''
   }
 
-  //
-  // Example commands
-  //
-
-  async getTenants (): Promise<Tenant[]> {
-    let sophos: any = []
+  async getTenants(): Promise<SophosTenant[]> {
+    let tenants: SophosTenant[] = []
     let pageNum = 1
     let pageTotal = 1
     while (pageTotal - pageNum >= 0) {
@@ -50,23 +26,20 @@ class Sophos {
         {
           method: 'GET',
           headers: {
-            'X-Partner-ID': this.config.partnerId
-          }
-        }
+            'X-Partner-ID': this._config.partnerId,
+          },
+        },
       )
-      const sophosReturn = JSON.parse(res.body)
+      const sophosReturn = res.data
       pageTotal = sophosReturn.pages.total
       pageNum++
-      sophos = sophos.concat(sophosReturn.items)
+      tenants = tenants.concat(sophosReturn.items)
     }
-    return sophos
+    return tenants
   }
 
-  async getEndpoints (
-    tenantId: string,
-    tenantApiHost: string
-  ): Promise<object[]> {
-    let sophos: any = []
+  async getEndpoints(tenantId: string, tenantApiHost: string): Promise<SophosEndpoint[]> {
+    let endpoints: SophosEndpoint[] = []
     let pageKey = ''
     let status = true
     while (status) {
@@ -75,39 +48,39 @@ class Sophos {
         {
           method: 'GET',
           headers: {
-            'X-Tenant-ID': tenantId
-          }
-        }
+            'X-Tenant-ID': tenantId,
+          },
+        },
       )
-      const sophosReturn = JSON.parse(res.body)
-      sophos = sophos.concat(sophosReturn.items)
+      const sophosReturn = res.data
+      endpoints = endpoints.concat(sophosReturn.items)
       pageKey = sophosReturn.pages.nextKey
       if (!pageKey) {
         status = false
       }
     }
-    return sophos
+    return endpoints
   }
 
-  private async _authenticate (): Promise<string> {
-    const res = await got('https://id.sophos.com/api/v2/oauth2/token', {
+  private async _authenticate(): Promise<string> {
+    const res: any = await axios('https://id.sophos.com/api/v2/oauth2/token', {
       method: 'post',
       headers: {
-        'content-type': 'application/x-www-form-urlencoded'
+        'content-type': 'application/x-www-form-urlencoded',
       },
-      body: qs.stringify({
+      data: qs.stringify({
         grant_type: 'client_credentials',
         scope: 'token',
-        client_id: this.config.clientId,
-        client_secret: this.config.clientSecret
-      })
+        client_id: this._config.clientId,
+        client_secret: this._config.clientSecret,
+      }),
     })
-    const body: any = JSON.parse(res.body)
-    this.accessToken = body.access_token
-    return body.access_token
+    const { data: AccessToken }: any = res
+    this.accessToken = AccessToken.access_token
+    return AccessToken.access_token
   }
 
-  private async _SophosRequest (url: string, options: any): Promise<any> {
+  private async _SophosRequest(url: string, options: any): Promise<any> {
     try {
       if (!this.accessToken) {
         const token = await this._authenticate()
@@ -115,14 +88,14 @@ class Sophos {
       } else {
         options.headers.Authorization = `Bearer ${this.accessToken}`
       }
-      const res = await got(url, options)
+      const res = await axios(url, options)
 
       return res
     } catch (err) {
       if (err.statusCode === 401) {
         const token = await this._authenticate()
         options.headers.Authorization = `Bearer ${token}`
-        const res = await got(url, options)
+        const res = await axios(url, options)
         return res
       }
       throw err
@@ -130,4 +103,4 @@ class Sophos {
   }
 }
 
-export = Sophos
+export default Sophos
