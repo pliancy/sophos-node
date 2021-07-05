@@ -24,7 +24,7 @@ jobs:
 
       # Install node from package.json volta config
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v2.2.0
         with:
           node-version: ${{ matrix.node }}
 
