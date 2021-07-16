@@ -1,35 +1,18 @@
 {
-  "name": "sophos",
-  "version": "0.1.0",
-  "description": "Typescript wrapper for Sophos's API",
-  "main": "index.js",
-  "types": "index.d.ts",
-  "scripts": {
-    "build": "run-s -l clean test tsc copy",
-    "build:check": "tsc --noEmit",
-    "clean": "rimraf coverage dist tmp",
-    "copy": "cpy package.json dist && cpy README.md dist",
-    "lint": "eslint \"src/**/*.ts\" --fix",
-    "postinstall": "[ -d '.husky' ] && husky install || true",
-    "qa": "run-s -l lint test clean build:check",
-    "semantic-release": "semantic-release",
-    "test": "jest",
-    "tsc": "tsc -p tsconfig.build.json"
-  },
-  "keywords": [],
   "author": {
     "name": "Santese Smith"
   },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/santese/sophos-node.git"
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "dependencies": {
     "@types/qs": "6.9.7",
     "axios": "0.21.1",
     "qs": "6.10.1"
   },
+  "description": "Typescript wrapper for Sophos's API",
   "devDependencies": {
     "@pliancy/eslint-config-ts": "0.0.5",
     "@pliancy/semantic-release-config-npm": "2.1.0",
@@ -48,13 +31,30 @@
   "engines": {
     "node": ">=12"
   },
+  "keywords": [],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "sophos",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pliancy/sophos-node"
+  },
+  "scripts": {
+    "build": "run-s -l clean test tsc copy",
+    "build:check": "tsc --noEmit",
+    "clean": "rimraf coverage dist tmp",
+    "copy": "pinst --disable && cpy package.json dist && cpy README.md dist && pinst --enable",
+    "lint": "eslint \"src/**/*.ts\" --fix",
+    "postinstall": "husky install",
+    "qa": "run-s -l lint test clean build:check",
+    "semantic-release": "semantic-release",
+    "test": "jest",
+    "tsc": "tsc -p tsconfig.build.json"
+  },
+  "types": "index.d.ts",
+  "version": "0.1.0",
   "volta": {
     "node": "14.17.3",
     "yarn": "1.22.10"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }
