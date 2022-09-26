@@ -7,11 +7,14 @@ export interface SophosConfig {
 export interface SophosTenant {
     id: string
     name: string
+    showAs: string
     dataGeography: string
     dataRegion: string
     billingType: string
-    partner: object
-    organization: string
+    partner: {
+        id: string
+    }
+    status: string
     apiHost: string
 }
 

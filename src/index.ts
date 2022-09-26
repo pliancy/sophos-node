@@ -92,7 +92,7 @@ export class Sophos {
             const res = await axios(url, options)
 
             return res
-        } catch (err) {
+        } catch (err: any) {
             if (err.statusCode === 401) {
                 const token = await this._authenticate()
                 options.headers.Authorization = `Bearer ${token}`
