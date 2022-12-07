@@ -10,7 +10,7 @@
   "dependencies": {
     "@types/qs": "6.9.7",
     "axios": "0.21.1",
-    "qs": "6.10.1"
+    "qs": "6.10.3"
   },
   "description": "Typescript wrapper for Sophos's API",
   "devDependencies": {
