@@ -14,7 +14,7 @@
   },
   "description": "Typescript wrapper for Sophos's API",
   "devDependencies": {
-    "@pliancy/eslint-config-ts": "0.0.5",
+    "@pliancy/eslint-config-ts": "0.1.0",
     "@pliancy/semantic-release-config-npm": "2.1.0",
     "@types/jest": "26.0.24",
     "commitizen": "4.2.4",
